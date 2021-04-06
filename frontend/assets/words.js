@@ -13,12 +13,13 @@
                                             var tbody = document.getElementById("keybody");
                                             tbody.innerHTML = "";
                                             var users = JSON.parse(resp);
+							
+											
                                             for (var i = 0; i < users.length; i++) {
                                                 var u = users[i];
-											  
-                                              //  tbody.innerHTML +="<tr>"+"<td><span>"+u["id"]+"</span></td>"+"<td><input type=\"text\">"+u["keyword"] + \"</td>"+" <td><textarea style=\"width: 406.8px;\">"+u["definition"]+"<\"/textarea>""</td>"+"<td class=\"text-center\">"<"a \"class=\"btn btn-success\" role=\"button\" style=\"background: rgb(11,171,56);margin: 2px;\"><i class=\"fas fa-pencil-alt\"></i></a><a class=\"btn btn-danger\" role=\"button\" style=\"margin: 2px;\"><i class=\"fas fa-trash\"></i></a></td>"+"</tr>"
-                                            
-                                                      
+
+												tbody.innerHTML+="<tr><td>"+u.id+"</td><td>"+u.keyword+"</td><td>"+u.definition+"</td><td><button class='btn btn-success btn-sm' id='user-update-btn' onclick='updateKeyWord(this)'>Update</button></td><td><button class='btn btn-danger btn-sm' onclick='removeKeyWord("+u.id+")'>Delete</button></td></tr>";
+     
                                                      
                                             }
                                         }
@@ -27,23 +28,16 @@
 								   req.setRequestHeader("authorization", token);
                                     req.send();
     
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+   }
+   
+   function updateKeyWord(button){
 	   
    }
    
-   
+   function removeKeyWord(id){
+	   
+	   
+   }
    
    
    
