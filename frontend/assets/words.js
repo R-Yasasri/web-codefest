@@ -49,7 +49,7 @@
 	   var keyword= document.getElementById("keyword").value;
 	   if(keyword.trim() ===""){
 	   document.getElementById("keyword").innerHTML="";
-			 var tbody = document.getElementById("definition").innerHTML="";
+			 var tbody = document.getElementById("keybody").innerHTML="";
 			 
 	   }
 	   
@@ -64,23 +64,22 @@
 		
 		 if(keyword.trim() ===""){
 			 clearfild();
-			
+			loadKeyWords();
 		 }else{
 			
 			  var req = new XMLHttpRequest();
 
-                                    req.onreadystatechange = function () {
+                                            var tbody = document.getElementById("keybody");
+									tbody.innerHTML="";		
+									
+									req.onreadystatechange = function () {
                                         if (req.readyState == 4 && req.status == 200) {
                                             var resp = req.responseText;
+											var obj = JSON.parse(resp);
+											var u=obj[0];
 											
-											alert(resp);
-                                           
-                                            var tbody = document.getElementById("definition");
-                                            tbody.innerHTML="";
-                                            var u = JSON.parse(resp);
-                                          // alert(u[0].definition);
-                                                tbody.innerHTML += 
-                                                        ""+u[0].definition;
+												tbody.innerHTML+="<tr><td>"+u.id+"</td><td>"+u.keyword+"</td><td>"+u.definition+"</td><td><button class='btn btn-success btn-sm' id='user-update-btn' onclick='updateKeyWord(this)'>Update</button></td><td><button class='btn btn-danger btn-sm' onclick='removeKeyWord("+u.id+")'>Delete</button></td></tr>";
+    
                                             
                                         }
                                     };
