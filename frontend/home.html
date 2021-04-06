@@ -188,7 +188,7 @@ $(document).ready(function(){
 
 </head>
 
-<body onload="loadAllData();">
+<body onload="loadAllData();keywordsll();">
     <div class="panel panel-default">
         <ul class="nav nav-pills nav-justified border rounded-pill panel-heading" role="tablist">
             <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Key words</a></li>
@@ -201,9 +201,9 @@ $(document).ready(function(){
                 </div>
                 <div class="container-fluid" style="margin-top: 46px;">
                     <div class="row" style="box-shadow: -1px 5px 5px 3px rgb(165,172,179), 0px -3px 4px 1px rgb(210,216,221);margin-bottom: 20px;padding: 5px 10px;margin-left: 5px;margin-right: 5px;">
-                        <div class="col"><span>Key word:&nbsp;</span><input type="text"></div>
-                        <div class="col"><span>Definition:&nbsp;</span><input type="text"></div>
-                        <div class="col-2 col-sm-6 col-md-2 col-lg-2 text-right" style="margin-bottom: 30px;"><a class="btn btn-primary text-light" role="button"><i class="fa fa-plus"></i>&nbsp;Add a user</a></div>
+                        <div class="col"><span>Key word:&nbsp;</span><input type="text" id="tkeyword"></div>
+                        <div class="col"><span>Definition:&nbsp;</span><input type="text" id="tdefinition"></div>
+                        <div class="col-2 col-sm-6 col-md-2 col-lg-2 text-right"  style="margin-bottom: 30px;"><a class="btn btn-primary text-light" href="#" onclick="addKeyword();"  role="button"><i class="fa fa-plus"></i>&nbsp;Keyword</a></div>
                     </div>
                     <div class="card" id="TableSorterCard" style="margin-top: 44px;">
                         <div class="row d-lg-flex align-items-lg-center">
@@ -218,19 +218,8 @@ $(document).ready(function(){
                                                 <th class="text-center filter-false sorter-false">ACTION</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="text-center">
-                                            <tr>
-                                                <td><span>1</span></td>
-                                                <td><input type="text"></td>
-                                                <td><textarea style="width: 406.8px;"></textarea></td>
-                                                <td class="text-center"><a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" role="button" style="margin: 2px;"><i class="fas fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fer<br></td>
-                                                <td>Desarrollador</td>
-                                                <td>Development</td>
-                                                <td class="text-center"><a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" role="button" style="margin: 2px;"><i class="fas fa-trash"></i></a></td>
-                                            </tr>
+                                        <tbody class="text-center" id="keybody">
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -272,6 +261,7 @@ $(document).ready(function(){
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/words.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
@@ -280,6 +270,10 @@ $(document).ready(function(){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/Table-with-search--sort-filters.js"></script>
+	
+	
+	
+
 </body>
 
 </html>
