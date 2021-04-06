@@ -1,35 +1,30 @@
 
-    function keywordsll(){
-	   
-	   
-	   
+    function loadKeyWords(){
 	   
 	    var req = new XMLHttpRequest();
+		var token=getToken();
 
                                     req.onreadystatechange = function () {
                                         if (req.readyState == 4 && req.status == 200) {
                                             var resp = req.responseText;
+
+		//alert(resp);
 
                                             var tbody = document.getElementById("keybody");
                                             tbody.innerHTML = "";
                                             var users = JSON.parse(resp);
                                             for (var i = 0; i < users.length; i++) {
                                                 var u = users[i];
-											
-                                                tbody.innerHTML += 
-                                                "<tr>"
-                                                "<td><span>"+u["id"]+"</span>""</td>"
-                                                "<td><input type=\"text\">"+u["keyword"] + \"</td>"
-                                               " <td><textarea style=\"width: 406.8px;\">"+u["definition"]+"<\"/textarea>""</td>"
-                                                "<td class=\"text-center\">"<"a \"class=\"btn btn-success\" role=\"button\" style=\"background: rgb(11,171,56);margin: 2px;\"><i class=\"fas fa-pencil-alt\"></i></a><a class=\"btn btn-danger\" role=\"button\" style=\"margin: 2px;\"><i class=\"fas fa-trash\"></i></a></td>"
-                                            "</tr>"
+											  
+                                              //  tbody.innerHTML +="<tr>"+"<td><span>"+u["id"]+"</span></td>"+"<td><input type=\"text\">"+u["keyword"] + \"</td>"+" <td><textarea style=\"width: 406.8px;\">"+u["definition"]+"<\"/textarea>""</td>"+"<td class=\"text-center\">"<"a \"class=\"btn btn-success\" role=\"button\" style=\"background: rgb(11,171,56);margin: 2px;\"><i class=\"fas fa-pencil-alt\"></i></a><a class=\"btn btn-danger\" role=\"button\" style=\"margin: 2px;\"><i class=\"fas fa-trash\"></i></a></td>"+"</tr>"
                                             
                                                       
-                                                       
+                                                     
                                             }
                                         }
                                     };
                                    req.open("GET","http://localhost:8080/search/getAll", true);
+								   req.setRequestHeader("authorization", token);
                                     req.send();
     
 	   
