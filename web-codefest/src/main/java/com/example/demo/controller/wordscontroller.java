@@ -82,11 +82,12 @@ public class wordscontroller {
 	        return wordsService.updateWords(word);
 	    }
 	 
-	 
 	
-	
-	
-	
+	@PostMapping("/mainsearch")
+	public List<Words> getSearch(@RequestBody @RequestParam("keyword") String keyword) {
+		
+		return  wordsService.getserachByKeyword(keyword);
+	}
 	
 	
 

@@ -227,16 +227,16 @@ function loadAllData(){
         var settings={
             "url":"http://localhost:8080/adminUser/",
             "method":"GET",
-            "headers": {
-              "content-type": "application/json",
-              "authorization": getToken(),
-             "cache-control": "no-cache"
-  },
-        }
+
+			  "headers": {
+						"authorization": getToken()
+	    		}
+		}
+
 
         $.ajax(settings).done(function(data){
 
-
+//alert(JSON.stringify(data));
             loadTable(data);
 
         });
@@ -321,12 +321,15 @@ $(document).ready(function(){
                 var settings={
                     "url":"http://localhost:8080/adminUser/getUserByName/"+name,
                     "method":"GET",
-                      "headers": {
-                      "authorization": getToken()
-                      }
+					  "headers": {
+					  "authorization": getToken()
+					  }
+
                 }
 
                 $.ajax(settings).done(function(data){
+
+				//alert(JSON.stringify(data));
 
                 loadTable(data);
 
@@ -377,8 +380,16 @@ function getToken(){
                             <div class="col-12">
                                 <div class="table-responsive">
                                     <table class="table table-striped table tablesorter" id="ipi-table">
-                                        <thead class="thead-dark" id="word-table">
-                                            
+
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="text-center">&nbsp;id</th>
+                                                <th class="text-center">Key word</th>
+                                                <th class="text-center">DEFINITION</th>
+                                                <th class="text-center filter-false sorter-false">ACTION</th>
+												<th class="text-center filter-false sorter-false"></th>
+                                            </tr>
+
                                         </thead>
                                         <tbody class="text-center" id="wordtd">
                                             
