@@ -19,6 +19,10 @@ public interface AdminUserRepository extends JpaRepository<AdminUser, Integer>{
 	List<AdminUserObj> getUsersWithoutPassword();
 	
 	@Query("SELECT u FROM AdminUser u WHERE u.username=?1 AND u.password=?2")
+<<<<<<< Updated upstream
 	AdminUser  getByuserNamePassword(String name,String password);
 
+=======
+	public AdminUser getUserByUserNameAndPassword(String userName,String password);
+>>>>>>> Stashed changes
 }
