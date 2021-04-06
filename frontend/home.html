@@ -41,7 +41,7 @@ table.innerHTML="<tr><th>id</th><th>name</th><th>phone</th><th>user name</th><th
 
         var cell4="<td> <input type='text' value='"+d.username+"' /> </td>";
 
-        var cell5="<td> <input type='text' value='"+d.status+"' /> </td>";
+        var cell5="<td> "+d["status"]+" </td>";
 
         var cell6="<td><button class='btn btn-success btn-sm' id='user-update-btn' onclick='updateUser(this)'>Update</button></td>";
 
@@ -51,6 +51,63 @@ table.innerHTML="<tr><th>id</th><th>name</th><th>phone</th><th>user name</th><th
             
         table.innerHTML+=tr;
             }
+}
+
+function updateUser(button){
+
+    var td=button.parentNode;
+    var tr=td.parentNode;
+
+    var td=tr.getElementsByTagName("td");
+
+    
+    var nameField=td[1].getElementsByTagName("input");
+    var phoneField=td[2].getElementsByTagName("input");
+    var usernameField=td[3].getElementsByTagName("input");
+    var statusField=td[4].getElementsByTagName("input");
+
+    var action = "Active";
+   if (statusField == "Deactive") {
+        action = "Deactive";
+
+   }
+
+    var user={
+        "id":td[0].innerHTML,
+        "name":nameField[0].value,
+        "phone":phoneField[0].value,
+        "username":usernameField[0].value,
+        "status":action
+    }
+
+    var settings={
+                "url":"http://localhost:8080/adminUser/update",
+                "method":"PUT",
+                "timeout":0,
+                "headers":{
+                    "Content-Type":"application/json"
+                },
+                "data":JSON.stringify(user)
+    };
+
+    $.ajax(settings).done(function(data){
+
+        alert(data);
+        loadAllData();
+    });
+
+}
+
+function removeUser(id){
+    var settings={
+                "url":"http://localhost:8080/adminUser/"+id,
+                "method":"DELETE"
+    }
+
+    $.ajax(settings).done(function(data){
+    alert("Deleted Successfully");
+    loadAllData();
+    });
 }
 
 function loadAllData(){
@@ -68,6 +125,38 @@ function loadAllData(){
 
         });
 }
+
+$(document).ready(function () {
+    $("#btn-add").click(function (){
+
+            var user={
+
+                "name":$("#name").val(),
+                "username":$("#username").val(),
+                "phone":$("#phone").val(),
+                "password":$("#password").val(),
+                "status":"Active"
+            };
+
+            var settings={
+                "url":"http://localhost:8080/adminUser/addnew",
+                "method":"POST",
+                "timeout":0,
+                "headers":{
+                    "Content-Type":"application/json"
+                },
+                "data":JSON.stringify(user)
+            };
+
+
+            $.ajax(settings).done(function (data){
+                alert("New User Registered Successfully");
+                loadAllData();
+            });
+            
+    });
+
+    });
 
 </script>
 
@@ -91,7 +180,7 @@ function loadAllData(){
                         <div class="col-12 col-sm-6 col-md-6 col-lg-2"><span>Phone number:&nbsp;</span><input type="text" id="phone"></div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-2"><span>Password:&nbsp;</span><input type="Password" id="password"></div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-2"><span>User name:&nbsp;</span><input type="text" id="username"></div>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 text-right" style="margin-bottom: 30px;"><a class="btn btn-primary text-light" role="button"><i class="fa fa-plus"></i>&nbsp;Add a user</a></div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 text-right" style="margin-bottom: 30px;"><a class="btn btn-primary text-light" role="button" id="btn-add"><i class="fa fa-plus"></i>&nbsp;Add a user</a></div>
                     </div>
                     <div class="card" id="TableSorterCard" style="margin-top: 44px;">
                         <div class="row d-lg-flex align-items-lg-center">
@@ -101,7 +190,7 @@ function loadAllData(){
                                         <thead class="thead-dark" id="user-table">
                                             
                                         </thead>
-                                        <tbody class="text-center">
+                                        <tbody class="text-center" id="tb">
                                             
                                         </tbody>
                                     </table>
