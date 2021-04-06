@@ -39,8 +39,8 @@
             <div class="col-md-9 col-xl-8 ml-auto mr-auto">
                 <form>
                     <div class="align-items-center form-row">
-                        <div class="form-group col-sm"><input class="form-control form-control pl-4 pr-4 rounded-pill" type="text" name="search" placeholder="Search a keyword..."></div>
-                        <div class="form-group col-sm-auto text-right"><button class="btn btn-primary pl-4 pr-4 rounded-pill" type="submit"><i class="fa fa-search"></i></button></div>
+                        <div class="form-group col-sm"><input class="form-control form-control pl-4 pr-4 rounded-pill" id="keyword" onkeyup="keywordsearh();" type="text" name="search" placeholder="Search a keyword..."></div>
+                        <div class="form-group col-sm-auto text-right"><button class="btn btn-primary pl-4 pr-4 rounded-pill" onclick="keywordsearh();" type="submit"><i class="fa fa-search"></i></button></div>
                     </div>
                 </form>
             </div>
@@ -48,7 +48,7 @@
     </div>
     <div>
         <h3 class="text-left" style="margin-left: 10px;">Definition is ..&nbsp;</h3>
-        <div class="container" style="border-style: solid;border-top: 1px solid var(--gray);color: rgb(154,167,180);border-top-left-radius: 8px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;margin-top: 20px;height: 100.4px;"><span>Text</span></div>
+        <div class="container" style="border-style: solid;border-top: 1px solid var(--gray);color: rgb(154,167,180);border-top-left-radius: 8px;border-top-right-radius: 8px;border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;margin-top: 20px;height: 100.4px;"><span id="definition">Text</span></div>
     </div>
     <footer class="footer-basic">
         <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
@@ -60,6 +60,9 @@
     </footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/words.js"></script>
+	
+	
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
