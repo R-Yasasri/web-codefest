@@ -86,7 +86,8 @@ function updateUser(button){
                 "method":"PUT",
                 "timeout":0,
                 "headers":{
-                    "Content-Type":"application/json"
+                    "Content-Type":"application/json",
+                    "authorization": getToken()
                 },
                 "data":JSON.stringify(user)
     };
@@ -102,7 +103,10 @@ function updateUser(button){
 function removeUser(id){
     var settings={
                 "url":"http://localhost:8080/adminUser/"+id,
-                "method":"DELETE"
+                "method":"DELETE",
+                "headers": {
+                      "authorization": getToken()
+                      }
     }
 
     $.ajax(settings).done(function(data){
@@ -112,14 +116,17 @@ function removeUser(id){
 }
 
 function loadAllData(){
+   
 
         var settings={
             "url":"http://localhost:8080/adminUser/",
             "method":"GET",
+
 			  "headers": {
 						"authorization": getToken()
 	    		}
 		}
+
 
         $.ajax(settings).done(function(data){
 
@@ -145,9 +152,11 @@ $(document).ready(function () {
                 "url":"http://localhost:8080/adminUser/addnew",
                 "method":"POST",
                 "timeout":0,
-                "headers":{
-                    "Content-Type":"application/json"
-                },
+                "headers": {
+                    "content-type": "application/json",
+                    "authorization": getToken(),
+                    "cache-control": "no-cache"
+             },
                 "data":JSON.stringify(user)
             };
 
@@ -177,11 +186,13 @@ $(document).ready(function(){
 					  "headers": {
 					  "authorization": getToken()
 					  }
+
                 }
 
                 $.ajax(settings).done(function(data){
 
-				alert(JSON.stringify(data));
+				//alert(JSON.stringify(data));
+
                 loadTable(data);
 
             });         
