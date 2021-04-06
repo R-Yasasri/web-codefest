@@ -78,7 +78,7 @@ public class wordsService {
         	 savewords.setDefinition(word.getDefinition());
         	 savewords.setKeyword(word.getKeyword());
              
-             
+             wordsRepository.save(savewords);
          }
          return "Updated Successfully";
      }
