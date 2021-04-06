@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +27,23 @@ public class wordscontroller {
 	wordsService wordsService;
 	
 	@GetMapping("/Bywords/{keyword}")
-	public Words getserachByKeyword(@PathVariable String keyword) {
+	public List<Words> getserachByKeyword(@PathVariable String keyword) {
 		
 		
 		return  wordsService.getserachByKeyword(keyword);
 		
 	}
+	
+	@GetMapping("/getAll")
+	
+	public List<Words> getAllwords(){
+		
+		
+		return wordsService.getAllwords();
+		
+	}
+	
+	
 	
 	@PostMapping("/addkeyword")
     public Words addProduct(@RequestBody @RequestParam("keyword")String keyword,@RequestBody @RequestParam("definition")String definition){
