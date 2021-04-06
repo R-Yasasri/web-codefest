@@ -70,7 +70,7 @@ public class wordsService {
 		
 	}
      
-     public Words updateWords(Words word) {
+     public String updateWords(Words word) {
     	 
          Words savewords = wordsRepository.findById(word.getId()).orElse(null);
          if (savewords != null) {
@@ -80,7 +80,7 @@ public class wordsService {
              
              
          }
-         return savewords;
+         return "Updated Successfully";
      }
      
      
