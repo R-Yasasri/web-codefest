@@ -62,7 +62,7 @@
    }
    
    
-     function keywordsearh(){
+     function keywordSearch(){
 		 
 		 
 		var keyword= document.getElementById("keyword").value;
@@ -78,6 +78,8 @@
                                     req.onreadystatechange = function () {
                                         if (req.readyState == 4 && req.status == 200) {
                                             var resp = req.responseText;
+											
+											alert(resp);
                                            
                                             var tbody = document.getElementById("definition");
                                             tbody.innerHTML="";
@@ -89,7 +91,8 @@
                                         }
                                     };
                                     req.open("GET","http://localhost:8080/search/Bywords/"+keyword.trim(),true);
-                                    req.send();
+                                    req.setRequestHeader("authorization", getToken());
+									req.send();
 			 
 		 }
 		
@@ -363,7 +366,7 @@
                                     var para="keyword="+tkeyword+"&definition="+tdefinition;
                                     
                                     req.open("POST", "http://localhost:8080/search/addkeyword", true);
-                                    
+                                    req.setRequestHeader("authorization", getToken());
                                     req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                                     req.send(para);
     
