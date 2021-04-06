@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,19 @@ public class wordsService {
 	WordsRepository wordsRepository;
 	
 	
-	public Words getserachByKeyword(String keyword) {
+	public List<Words> getserachByKeyword(String keyword) {
 		
 		
 		return wordsRepository.getserachByKeyword(keyword);
+		
+		
+	}
+	
+	
+      public List<Words> getAllwords() {
+		
+		
+		return wordsRepository.findAll();
 		
 		
 	}
