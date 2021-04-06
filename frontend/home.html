@@ -35,11 +35,13 @@
                 <div class="container" style="margin-bottom: 21px;margin-top: 13px;"><span>Search:&nbsp;</span><input type="text"></div>
                 <div class="container-fluid">
                     <div class="row" style="box-shadow: -1px 5px 5px 3px rgb(165,172,179), 0px -3px 4px 1px rgb(210,216,221);margin-bottom: 20px;padding: 5px 10px;margin-left: 5px;margin-right: 5px;">
-                        <div class="col"><span>Name:&nbsp;</span><input type="text"></div>
-                        <div class="col"><span>Phone:</span><input type="text"></div>
-                        <div class="col"><span>User name:&nbsp;</span><input type="text"></div>
-                        <div class="col"><span>Password:&nbsp;</span><input type="text"></div>
-                        <div class="col-2 col-sm-6 col-md-2 col-lg-2 text-right" style="margin-bottom: 30px;"><a class="btn btn-primary text-light" role="button"><i class="fa fa-plus"></i>&nbsp;Add a user</a></div>
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-2"><span>Name:&nbsp;</span><input type="text" id="name"></div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-2"><span>Phone number:&nbsp;</span><input type="text" id="phone"></div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-2"><span>Password:&nbsp;</span><input type="Password" id="password"></div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-2"><span>User name:&nbsp;</span><input type="text" id="username"></div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 text-right" style="margin-bottom: 30px;"><a class="btn btn-primary text-light" role="button"><i class="fa fa-plus"></i>&nbsp;Add a user</a></div>
+
                     </div>
                     <div class="card" id="TableSorterCard" style="margin-top: 44px;">
                         <div class="row d-lg-flex align-items-lg-center">
@@ -55,7 +57,9 @@
                                                 <th class="text-center filter-false sorter-false">ACTION</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="text-center">
+
+                                        <tbody class="text-center" id="tb">
+
                                             <tr>
                                                 <td><span>1</span></td>
                                                 <td><input type="text"></td>
