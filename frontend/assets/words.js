@@ -13,12 +13,13 @@
                                             var tbody = document.getElementById("keybody");
                                             tbody.innerHTML = "";
                                             var users = JSON.parse(resp);
+							
+											
                                             for (var i = 0; i < users.length; i++) {
                                                 var u = users[i];
-											  
-                                              //  tbody.innerHTML +="<tr>"+"<td><span>"+u["id"]+"</span></td>"+"<td><input type=\"text\">"+u["keyword"] + \"</td>"+" <td><textarea style=\"width: 406.8px;\">"+u["definition"]+"<\"/textarea>""</td>"+"<td class=\"text-center\">"<"a \"class=\"btn btn-success\" role=\"button\" style=\"background: rgb(11,171,56);margin: 2px;\"><i class=\"fas fa-pencil-alt\"></i></a><a class=\"btn btn-danger\" role=\"button\" style=\"margin: 2px;\"><i class=\"fas fa-trash\"></i></a></td>"+"</tr>"
-                                            
-                                                      
+
+												tbody.innerHTML+="<tr><td>"+u.id+"</td><td>"+u.keyword+"</td><td>"+u.definition+"</td><td><button class='btn btn-success btn-sm' id='user-update-btn' onclick='updateKeyWord(this)'>Update</button></td><td><button class='btn btn-danger btn-sm' onclick='removeKeyWord("+u.id+")'>Delete</button></td></tr>";
+     
                                                      
                                             }
                                         }
@@ -27,23 +28,16 @@
 								   req.setRequestHeader("authorization", token);
                                     req.send();
     
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+   }
+   
+   function updateKeyWord(button){
 	   
    }
    
-   
+   function removeKeyWord(id){
+	   
+	   
+   }
    
    
    
@@ -55,7 +49,7 @@
 	   var keyword= document.getElementById("keyword").value;
 	   if(keyword.trim() ===""){
 	   document.getElementById("keyword").innerHTML="";
-			 var tbody = document.getElementById("definition").innerHTML="";
+			 var tbody = document.getElementById("keybody").innerHTML="";
 			 
 	   }
 	   
@@ -70,23 +64,22 @@
 		
 		 if(keyword.trim() ===""){
 			 clearfild();
-			
+			loadKeyWords();
 		 }else{
 			
 			  var req = new XMLHttpRequest();
 
-                                    req.onreadystatechange = function () {
+                                            var tbody = document.getElementById("keybody");
+									tbody.innerHTML="";		
+									
+									req.onreadystatechange = function () {
                                         if (req.readyState == 4 && req.status == 200) {
                                             var resp = req.responseText;
+											var obj = JSON.parse(resp);
+											var u=obj[0];
 											
-											alert(resp);
-                                           
-                                            var tbody = document.getElementById("definition");
-                                            tbody.innerHTML="";
-                                            var u = JSON.parse(resp);
-                                          // alert(u[0].definition);
-                                                tbody.innerHTML += 
-                                                        ""+u[0].definition;
+												tbody.innerHTML+="<tr><td>"+u.id+"</td><td>"+u.keyword+"</td><td>"+u.definition+"</td><td><button class='btn btn-success btn-sm' id='user-update-btn' onclick='updateKeyWord(this)'>Update</button></td><td><button class='btn btn-danger btn-sm' onclick='removeKeyWord("+u.id+")'>Delete</button></td></tr>";
+    
                                             
                                         }
                                     };
