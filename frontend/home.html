@@ -341,6 +341,36 @@ $(document).ready(function(){
 });
 
 
+$(document).ready(function(){
+
+    $("#wordsearch").keyup(function (){
+
+            var name=$("#wordsearch").val();
+            
+            
+            if(name===""){
+                loadKeyWords();
+            }else{
+                var settings={
+                    "url":"http://localhost:8080/search/Bywords/"+name,
+                    "method":"GET",
+                      "headers": {
+                      "authorization": getToken()
+                      }
+                }
+
+                $.ajax(settings).done(function(data){
+
+                loadWordTable(data);
+
+            });         
+            
+            }
+
+    })
+});
+
+
 function getToken(){
 
 	var tok=localStorage.getItem("token");
@@ -365,7 +395,7 @@ function getToken(){
         <div class="tab-content panel-body">
             <div class="tab-pane active" role="tabpanel" id="tab-1">
                 <div class="row" style="padding-left: 39px;margin-top: 42px;">
-                    <div class="col"><span>Search:&nbsp;</span><input type="text" onKeyUp="keywordSearch()" id="keyword"></div>
+                    <div class="col"><span>Search:&nbsp;</span><input type="text" id="wordsearch"></div>
                 </div>
                 <div class="container-fluid" style="margin-top: 46px;">
                     <div class="row" style="box-shadow: -1px 5px 5px 3px rgb(165,172,179), 0px -3px 4px 1px rgb(210,216,221);margin-bottom: 20px;padding: 5px 10px;margin-left: 5px;margin-right: 5px;">
