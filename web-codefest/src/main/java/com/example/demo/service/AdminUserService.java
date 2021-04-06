@@ -63,23 +63,11 @@ public class AdminUserService {
 		}
 		return message;
 	}
-	
-<<<<<<< Updated upstream
 	 public AdminUser getByuserNamePassword(String name,String password) {
 		 
 		 
 		 return userRepo.getByuserNamePassword(name, password);
 		 
 	 }
-=======
-	public AdminUser getByuserNamePassword(String userName,String password) {
-		
-		System.out.println("user name"+userName);
-		System.out.println("password"+password);
-		
-		
-		return userRepo.getUserByUserNameAndPassword(userName, password);
-	}
 
->>>>>>> Stashed changes
 }
