@@ -14,6 +14,7 @@ import com.example.demo.controller.JwtAuthenticationController;
 import com.example.demo.entity.AdminUser;
 
 
+
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
@@ -26,7 +27,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-		
+
 	AdminUser u	= userService.getByuserNamePassword(username,JwtAuthenticationController.pw);
 
 		String encodedPw= encoder.encode(JwtAuthenticationController.pw);

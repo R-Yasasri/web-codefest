@@ -21,7 +21,11 @@ import com.example.demo.entity.JwtRequest;
 import com.example.demo.entity.JwtResponse;
 
 @RestController
+<<<<<<< Updated upstream
 @CrossOrigin
+=======
+@CrossOrigin(origins = "*",allowedHeaders = "*")
+>>>>>>> Stashed changes
 public class JwtAuthenticationController {
 
 	@Autowired
