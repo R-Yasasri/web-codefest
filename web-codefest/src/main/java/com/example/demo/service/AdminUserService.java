@@ -63,4 +63,11 @@ public class AdminUserService {
 		}
 		return message;
 	}
+	
+	 public AdminUser getByuserNamePassword(String name,String password) {
+		 
+		 
+		 return userRepo.getByuserNamePassword(name, password);
+		 
+	 }
 }
