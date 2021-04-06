@@ -54,6 +54,112 @@ table.innerHTML="<tr><th>id</th><th>name</th><th>phone</th><th>user name</th><th
             }
 }
 
+function loadWordTable(data){
+
+        var table=document.getElementById('word-table');
+
+        table.innerHTML="";
+
+table.innerHTML="<tr><th>id</th><th>KeyWord</th><th>Definition</th><th></th><th></th></tr>"
+
+    for (var i = data.length - 1; i >= 0; i--) {
+        var d=data[i];
+
+        var cell1="<td>"+d["id"]+"</td>";
+
+        var cell2="<td> <input type='text' value='"+d.keyword+"' /> </td>";
+
+        var cell3="<td> <input type='text' value='"+d.definition+"' /> </td>";
+
+
+        var cell4="<td><button class='btn btn-success btn-sm' onclick='updateWord(this)'>Update</button></td>";
+
+        var cell5="<td><button class='btn btn-danger btn-sm' onclick='removeWord("+d.id+")'>Delete</button></td>";
+
+        var tr="<tr>"+cell1+cell2+cell3+cell4+cell5+"</tr>";
+            
+        table.innerHTML+=tr;
+            }
+}
+
+
+function loadKeyWords(){
+   
+
+        var settings={
+            "url":"http://localhost:8080/search/getAll/",
+            "method":"GET",
+            "headers": {
+              "content-type": "application/json",
+              "authorization": getToken(),
+             "cache-control": "no-cache"
+  },
+        }
+
+        $.ajax(settings).done(function(data){
+
+
+            loadWordTable(data);
+
+        });
+}
+
+
+function updateWord(button){
+
+    var td=button.parentNode;
+    var tr=td.parentNode;
+
+    var td=tr.getElementsByTagName("td");
+
+    
+    var keywordField=td[1].getElementsByTagName("input");
+    var definistionField=td[2].getElementsByTagName("input");
+
+
+
+    var word={
+        "id":td[0].innerHTML,
+        "keyword":keywordField[0].value,
+        "definition":definistionField[0].value,
+
+    }
+
+    var settings={
+                "url":"http://localhost:8080/search/updateword",
+                "method":"PUT",
+                "timeout":0,
+                "headers":{
+                    "Content-Type":"application/json",
+                    "authorization": getToken()
+                },
+                "data":JSON.stringify(word)
+    };
+
+    $.ajax(settings).done(function(data){
+
+        alert(data);
+        loadKeyWords();
+    });
+
+}
+
+function removeWord(id){
+    var settings={
+                "url":"http://localhost:8080/search/deletekeyword/"+id,
+                "method":"DELETE",
+                "headers": {
+                      "authorization": getToken()
+                      }
+    }
+
+    $.ajax(settings).done(function(data){
+    alert("Deleted Successfully");
+    loadKeyWords();
+    });
+}
+
+
 function updateUser(button){
 
     var td=button.parentNode;
@@ -168,6 +274,38 @@ $(document).ready(function () {
             
     });
 
+
+
+    $("#add-word").click(function (){
+
+            var word={
+
+                "keyword":$("#tkeyword").val(),
+                "definition":$("#tdefinition").val(),
+               
+            };
+
+            var settings={
+                "url":"http://localhost:8080/search/addnew/",
+                "method":"POST",
+                "timeout":0,
+                "headers": {
+                    "content-type": "application/json",
+                    "authorization": getToken(),
+                    "cache-control": "no-cache"
+             },
+                "data":JSON.stringify(word)
+            };
+
+
+            $.ajax(settings).done(function (data){
+                alert("New Word Registered Successfully");
+                loadKeyWords();
+            });
+            
+    });
+
+
     });
 
 $(document).ready(function(){
@@ -215,7 +353,7 @@ function getToken(){
 
 </head>
 
-<body onload="loadAllData();loadKeyWords();">
+<body onload="loadAllData();loadKeyWords()">
     <div class="panel panel-default">
         <ul class="nav nav-pills nav-justified border rounded-pill panel-heading" role="tablist">
             <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Key words</a></li>
@@ -231,7 +369,7 @@ function getToken(){
 
                         <div class="col"><span>Key word:&nbsp;</span><input type="text" id="tkeyword"></div>
                         <div class="col"><span>Definition:&nbsp;</span><input type="text" id="tdefinition"></div>
-                        <div class="col-2 col-sm-6 col-md-2 col-lg-2 text-right"  style="margin-bottom: 30px;"><a class="btn btn-primary text-light" href="#" onclick="addKeyword();"  role="button"><i class="fa fa-plus"></i>&nbsp;Add a Keyword</a></div>
+                        <div class="col-2 col-sm-6 col-md-2 col-lg-2 text-right"  style="margin-bottom: 30px;"><a class="btn btn-primary text-light" href="#" id="add-word" role="button"><i class="fa fa-plus"></i>&nbsp;Add a Keyword</a></div>
 
                     </div>
                     <div class="card" id="TableSorterCard" style="margin-top: 44px;">
@@ -239,15 +377,10 @@ function getToken(){
                             <div class="col-12">
                                 <div class="table-responsive">
                                     <table class="table table-striped table tablesorter" id="ipi-table">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th class="text-center">&nbsp;id</th>
-                                                <th class="text-center">Key word</th>
-                                                <th class="text-center">DEFINITION</th>
-                                                <th class="text-center filter-false sorter-false">ACTION</th>
-                                            </tr>
+                                        <thead class="thead-dark" id="word-table">
+                                            
                                         </thead>
-                                        <tbody class="text-center" id="keybody">
+                                        <tbody class="text-center" id="wordtd">
                                             
                                         </tbody>
                                     </table>
@@ -290,7 +423,7 @@ function getToken(){
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/words.js"></script>
+	
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>

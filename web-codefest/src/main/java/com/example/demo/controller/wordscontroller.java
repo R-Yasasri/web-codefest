@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.AdminUser;
 import com.example.demo.entity.Words;
 import com.example.demo.service.wordsService;
 
@@ -59,6 +60,12 @@ public class wordscontroller {
     	
     }
 	
+	@PostMapping("/addnew")
+	public Words addWord(@RequestBody Words words) {
+	
+		return wordsService.addProduct(words);
+	}
+	
 	
 	 @DeleteMapping("/deletekeyword/{id}")
 	    public String deleteProduct(@PathVariable int id){
@@ -71,7 +78,7 @@ public class wordscontroller {
 	
 	 
 	 @PutMapping("/updateword")
-	    public Words updateWords(@RequestBody Words word){
+	    public String updateWords(@RequestBody Words word){
 	        return wordsService.updateWords(word);
 	    }
 	 
