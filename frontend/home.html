@@ -185,6 +185,19 @@ $(document).ready(function(){
 
     })
 });
+
+
+function getToken(){
+
+	var tok=localStorage.getItem("token");
+	if(tok===""){
+			window.location="index.html";
+	}else{
+		
+		return tok;
+	}
+}
+
 </script>
 
 </head>
