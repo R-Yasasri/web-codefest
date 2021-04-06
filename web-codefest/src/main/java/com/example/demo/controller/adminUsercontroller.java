@@ -28,25 +28,18 @@ public class adminUsercontroller {
 	@Autowired
 	AdminUserService userService;
 
-	@GetMapping("/hello")
-	public String getHello() {
-		
-		return "welcome.. codefest";	
-		
-	}
-
 	@GetMapping("/")
 	public List<AdminUserObj> getAllUsers(){
 		return userService.getUsers();
 	}
 	
-	@PostMapping("/")
+	@PostMapping("/addnew")
 	public AdminUser addUser(@RequestBody AdminUser user) {
 	
 		return userService.addAUser(user);
 	}
 	
-	@PutMapping("/")
+	@PutMapping("/update")
 	public String updateUser(@RequestBody AdminUser user) {
 
 		return userService.updateUser(user);
