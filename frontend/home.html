@@ -116,12 +116,14 @@ function loadAllData(){
         var settings={
             "url":"http://localhost:8080/adminUser/",
             "method":"GET",
-            "Access-Control-Allow-Origin":"*"
-        }
+			  "headers": {
+						"authorization": getToken()
+	    		}
+		}
 
         $.ajax(settings).done(function(data){
 
-
+alert(JSON.stringify(data));
             loadTable(data);
 
         });
